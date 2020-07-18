@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     if logged_in?
-      redirect to '/students/index'
+      redirect to '/projects'
     else
     erb :index
     end
@@ -26,6 +26,15 @@ class ApplicationController < Sinatra::Base
 
     def current_user
       Student.find_by_id(session[:user_id])
+    end
+
+    def is_empty?(user_hash, route)
+      user_hash.each do |att, val|
+        if val.empty?
+          flash[:empty] = "Uh-oh! You need to complete all fields to move on."
+          redirect to "/#{route}"
+        end
+      end
     end
   end
 
