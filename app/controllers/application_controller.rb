@@ -5,10 +5,12 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    register Sinatra::Flash
     enable :sessions
+    register Sinatra::Flash
     set :session_secret, "Yabba Dabba Doo"
   end
+
+  
 
   get "/" do
     if logged_in?
@@ -25,7 +27,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      Student.find_by_id(session[:user_id])
+      User.find_by_id(session[:user_id])
     end
 
     def is_empty?(user_hash, route)

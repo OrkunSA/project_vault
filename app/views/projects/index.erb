@@ -1,0 +1,33 @@
+<div class="text-center"><h1>Welcome, <%= @user.username %></h1>
+
+<br>
+
+<% if @user.projects.empty? %>
+<div class="text-center"><p>Your project vault is empty </p>
+<p><a class="btn btn-success" style="margin: 20px" href="/projects/new" role="button">Add a New Project</a>
+<% else %>
+<div class="row">
+  <a class="btn btn-success" style="margin: 20px" href="/projects/new" role="button">+ Add a New Project</a>
+</div>
+  <% end %>
+
+
+<% @user.projects.each do |project| %>
+<p><%= project.title %></p>
+<p><%= project.description %></p>
+<p><%= project.platform %></p>
+<p><%= project.programming_language %></p>
+<p><%= project.start_date %></p>
+<p><%= project.end_date %></p>
+  <% end %>
+
+
+
+
+
+
+
+    
+
+
+

@@ -10,12 +10,20 @@
 
     <style>
     body {
-      background-color: black;
+      background-color: white;
 
     }
     </style>
   </head>
   <body>
+
+   <% if logged_in? %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a href="/logout">Logout</a>
+      </nav>
+      <% end %>
+      
+  
 
     <%= yield %>
 

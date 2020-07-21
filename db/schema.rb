@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200718214408) do
+ActiveRecord::Schema.define(version: 20200721000954) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -20,9 +20,10 @@ ActiveRecord::Schema.define(version: 20200718214408) do
     t.string   "programming_language"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.integer  "user_id"
   end
 
-  create_table "students", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.string "password_digest"
