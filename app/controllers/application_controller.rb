@@ -30,6 +30,14 @@ class ApplicationController < Sinatra::Base
       User.find_by_id(session[:user_id])
     end
 
+    def redirect_to_if_logged_in
+      redirect '/projects' if logged_in?
+    end
+
+    def redirect_to_if_not_logged_in
+      redirect '/login' unless logged_in?
+    end
+
     def is_empty?(user_hash, route)
       user_hash.each do |att, val|
         if val.empty?
