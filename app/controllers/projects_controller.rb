@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
     end
     
     #Deletes a project
-    delete '/projects/:id' do
+    delete '/projects/:id/delete' do
       @project = Project.find_by_id(params[:id])
       if logged_in? && @project.user_id == current_user.id
         @project.destroy

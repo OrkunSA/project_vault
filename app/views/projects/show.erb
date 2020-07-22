@@ -1,9 +1,18 @@
-<html>
-<p><%= @project.title %></p>
-<p><a href="/projects/<%= @project.id %>/edit" id="Edit Project">Edit Project</a></p>
-<form action="/projects/<%= @project.id %>" method="post">
-  <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Project">
+<div class="jumbotron">
+<h1 class="display-3"><%= @project.title %></h1>
+<p class="lead"><strong>Description: </strong> <%=@project.description%></p>
+<hr class="my-4">
+<p>More Details</p>
+<ul>
+  <li><%=@project.platform%></li>
+  <li><%=@project.programming_language%></li>
+</ul>
+
+ <a class="btn btn-info btn-sm" href="/projects/<%= @project.id %>/edit" role="button">Edit Project</a>
+ <br>
+
+<form method="POST" action="/projects/<%= @project.id %>/delete">
+<input id="hidden" type="hidden" name="_method" value="delete">
+<button type="submit" class="btn btn-danger btn-sm">Delete Project</button>
 </form>
 </html>
-© 
