@@ -246,6 +246,7 @@ footer img:focus , footer a:focus { outline: none; }
 <hgroup>
   <h1>Log In</h1>
 </hgroup>
+<% if @errors %><font color="red"><%= @errors.join(', ')%>. Please correct errors and try again.</font><% end %>
 <form action='/login' method='post'>
   <div class="group">
     <input type="username" placeholder="Username" name="username"><span class="highlight"></span><span class="bar"></span>
@@ -258,7 +259,7 @@ footer img:focus , footer a:focus { outline: none; }
  <div class="group">
     <input type="password" placeholder="Password" name="password"><span class="highlight"></span><span class="bar"></span>
   </div>
-   <button type="submit" class="button buttonBlue">Sign In
+   <button type="submit" class="button buttonBlue">Log in
     <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
   </button>
 

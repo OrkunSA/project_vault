@@ -9,13 +9,26 @@ class UsersController < ApplicationController
 
     post '/signup' do
         user = User.new(params)
-        if user.save
-          session[:user_id] = user.id
-          redirect '/projects'
+        if User.find_by(:username => user[:username])
+            flash[:account_taken] = "The username you provided is already in our system. Please enter a new username or log in to continue."
+            redirect to '/signup'
+        elsif 
+            User.find_by(:email => user[:email])
+            flash[:email_taken] = "The email you provided is already in our system. Please enter a new email or log in to continue."
+            redirect to '/signup'
         else
-          redirect '/signup'
+           if user.save 
+            session[:user_id] = user.id 
+            redirect to '/projects'
+           else
+            redirect to '/signup'
+           end
         end
+    
     end
+
+
+
 
     get '/login' do 
         if logged_in?
@@ -26,12 +39,18 @@ class UsersController < ApplicationController
     end
     
     post '/login' do
-        @current_user = User.find_by(:username => params[:username])
-        if @current_user && @current_user.authenticate(params[:password])
+        @current_user = User.find_by(:username => params[:username], :email => params[:email])
+        if @current_user && @current_user.authenticate(params[:password]) 
             session[:user_id] = @current_user.id 
             redirect to '/projects'
         else
-            redirect to '/signup'
+            if @current_user
+                flash[:password] = "Your password is incorrect"
+                redirect to '/login'
+            else
+                flash[:no_account] = "There is no account associated with that email address. Please enter a different email or sign up for an account."
+                redirect to '/login'
+            end
         end
     end 
 
@@ -43,14 +62,6 @@ class UsersController < ApplicationController
             redirect to '/'
         end
     end
-
-    
-        
-    get '/users/:slug' do 
-        @user = User.find_by_slug(params[:slug])
-        erb :'users/show'
-    end
-
 
 
 end
