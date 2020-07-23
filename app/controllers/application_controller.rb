@@ -38,14 +38,6 @@ class ApplicationController < Sinatra::Base
       redirect '/login' unless logged_in?
     end
 
-    def is_empty?(user_hash, route)
-      user_hash.each do |att, val|
-        if val.empty?
-          flash[:empty] = "Uh-oh! You need to complete all fields to move on."
-          redirect to "/#{route}"
-        end
-      end
-    end
   end
 
 end
