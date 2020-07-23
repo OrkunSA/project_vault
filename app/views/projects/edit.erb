@@ -1,19 +1,24 @@
-<h4>Editing <%= current_user.username %>'s <%= @project.title %></h4>
+<h1>Editing <%= current_user.username %>'s <%= @project.title %></h1>
 <form action="/projects/<%= @project.id %>/edit" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <p>Title:
-  <input type='text' name='title' value="<%= @project.title %>" if="title">
-  <br>
-  <p>Description:
-  <input type='text' name='description' value="<%= @project.description %>" if="description">
-  <br>
-  <p>Platform:
-  <input type='text' name='platform' value="<%= @project.platform %>" if="platform">
-  <br>
-  <p>Programming Language:
-  <input type='text' name='programminglanguage' value="<%= @project.programming_language %>" if="programminglanguage">
-  <br>
-  <input type="submit" value="submit">
-
+  <div class="form-group">
+    <label for="title">Title *</label>
+    <input type="text" class="form-control" id="title" name="title" value="<%= @project.title %>" required>
+  </div>
+  
+ <div class="form-group">
+    <label for="description">Description *</label>
+    <input type="text" class="form-control" id="description" name="description" value="<%= @project.description %>" required>
+ </div>
+ <div class="form-group">
+    <label for="platform">Platform *</label>
+    <input type="text" class="form-control" id="platform" name="platform" value="<%= @project.platform %>" required>
+ </div>
+  <div class="form-group">
+    <label for="programminglanguage">Programming Language *</label>
+    <input type="text" class="form-control" id="programminglanguage" name="programming_language" value="<%= @project.programming_language %>" required>
+ </div>
+  <br><br>
+<button type="submit" class="btn btn-primary" style="margin-bottom: 20px">Save Your Changes</button>
   </form>
 

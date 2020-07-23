@@ -47,12 +47,10 @@ class ProjectsController < ApplicationController
       @project.description = params[:description]
       @project.platform = params[:platform]
       @project.programming_language = params[:programming_language]
-      @project.start_date = params[:start_date]
-      @project.end_date = params[:end_date]
       @project.save 
+      redirect "/projects/#{@project.id}"
+    else
       redirect '/projects'
-      else
-      redirect "/projects/#{@project.id}/edit"
       end
     end
     

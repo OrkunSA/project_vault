@@ -10,9 +10,13 @@
 
  <a class="btn btn-info btn-sm" href="/projects/<%= @project.id %>/edit" role="button">Edit Project</a>
  <br>
-
+ <% if @project.user_id == @user.id %>
 <form method="POST" action="/projects/<%= @project.id %>/delete">
 <input id="hidden" type="hidden" name="_method" value="delete">
 <button type="submit" class="btn btn-danger btn-sm">Delete Project</button>
 </form>
-</html>
+<% end %>
+</div>
+<% if @project.user_id == @user.id %>
+  <div class="text-right"><a class="btn btn-success" style="margin: 20px" href="/projects" role="button">< Back to My Project Vault</a></div>
+<% end %>
