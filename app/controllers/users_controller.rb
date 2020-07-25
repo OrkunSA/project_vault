@@ -27,9 +27,6 @@ class UsersController < ApplicationController
     
     end
 
-
-
-
     get '/login' do 
         if logged_in?
             redirect  to '/projects'
@@ -45,7 +42,7 @@ class UsersController < ApplicationController
             redirect to '/projects'
         else
             if @current_user
-                flash[:password] = "Your password is incorrect"
+                flash[:password] = "Oh-huh! You typed a wrong password, please try again"
                 redirect to '/login'
             else
                 flash[:no_account] = "There is no account associated with that email address. Please enter a different email or sign up for an account."
