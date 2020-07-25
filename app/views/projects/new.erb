@@ -1,5 +1,3 @@
-<% if logged_in? %>
-<%= @error %>
 <h1>Add a New Project to Your Vault </h1>
  <form action="/projects" method="POST">
  <div class="form-group">
@@ -21,6 +19,4 @@
   <button type="submit" class="btn btn-primary" style="margin-bottom: 20px">SUBMIT</button>
 </form>
 
-  <% else %>
-      <h1> You Must Be Logged in to Add Projects </h1>
-  <% end %>
+ 
