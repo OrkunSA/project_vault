@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
         redirect_to_if_not_logged_in
         @user = current_user
         @projects = Project.all
-          erb :'/projects/index'
+        erb :'/projects/index'
     end
     
     #Loads new form
@@ -24,11 +24,16 @@ class ProjectsController < ApplicationController
           end
     end
     
-    #loads show page
+    #loads show page 
     get '/projects/:id' do
       @user = current_user
-      @project = Project.find(params[:id])
+      @project = Project.find_by_id(params[:id])
+      if @project
       erb :'/projects/show'
+      else 
+        flash[:fail] = "You don't have that project in your vault"
+        redirect '/projects'
+      end
     end 
     
     #loads edit form

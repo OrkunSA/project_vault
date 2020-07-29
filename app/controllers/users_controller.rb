@@ -9,22 +9,14 @@ class UsersController < ApplicationController
 
     post '/signup' do
         user = User.new(params)
-        if User.find_by(:username => user[:username])
-            flash[:account_taken] = "The username you provided is already in our system. Please enter a new username or log in to continue."
-            redirect to '/signup'
-        elsif 
-            User.find_by(:email => user[:email])
-            flash[:email_taken] = "The email you provided is already in our system. Please enter a new email or log in to continue."
-            redirect to '/signup'
-        else
-           if user.save 
+           if user.save
+            flash[:notice] = "You have succesfully signed up!" 
             session[:user_id] = user.id 
             redirect to '/projects'
            else
-            redirect to '/signup'
+            flash.now[:error] = "Something went wrong, please try again"
+            erb :'users/signup'
            end
-        end
-    
     end
 
     get '/login' do 
@@ -38,15 +30,16 @@ class UsersController < ApplicationController
     post '/login' do
         @current_user = User.find_by(:username => params[:username], :email => params[:email])
         if @current_user && @current_user.authenticate(params[:password]) 
-            session[:user_id] = @current_user.id 
+            session[:user_id] = @current_user.id
+            flash[:notice] = "You have succesfully logged in!" 
             redirect to '/projects'
         else
             if @current_user
-                flash[:password] = "Oh-huh! You typed a wrong password, please try again"
-                redirect to '/login'
+                flash.now[:error] = "Oh-huh! Something is wrong, please try again"
+                erb :'users/login'
             else
-                flash[:no_account] = "There is no account associated with that email address. Please enter a different email or sign up for an account."
-                redirect to '/login'
+                flash.now[:error] = "Oh-huh! Something is wrong, please try again"
+                erb :'users/login'
             end
         end
     end 
